@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Dot Net Tech Challange : Home</title>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.3.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#btnSubmit").click(function () {
+                var name = $('#txtName').val();
+                //console.log(name)
+                var num = $('#txtNumber').val();
+                //console.log(num)
+
+                if ($.isNumeric(num)) {                                     //Validation for Numeric only values in Number Text Box
+
+                    if (name.length === 0 || num.length === 0) {            //Required field validation for both the fileds
+
+                        alert("Name and Number both are the required fields.!!!")
+                    }
+                    else {
+                        //alert(num.length)
+                        $.ajax({
+
+                            url: 'api/values/?number=' + num, //Passing paramerts as a query string ...model binging can be another approach
+
+                            type: 'POST', //Because we are passing data to web api for convesrion
+
+                            dataType: 'json', //data type format
+
+                            data: { number: num }, //passing/binding parameter to be paased to the method in web api
+
+                            success: function (data) { //data will contain the response from the server
+
+                                //alert("Name: " + name + "\n" + "Number In Words: " + data);
+
+                                $(".card-title").text("Your Name is : " + name); //Setting name for output
+
+                                $(".card-text").text("Your Number in words is : " + data); //setting number for output
+                            },
+                            error: function (err) { console.log(err) }
+                        });
+                    }
+
+                }
+                else {
+                    alert("Only numeric values are allowed in Number filed!!!")
+                }
+
+            });
+        });
+
+    </script>
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top"><!--Nav Bar Starts-->
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">AKQA : Dot Net Tech Challange</a>
+            </div>
+        </div>
+    </nav><!--Nav Bar Ends-->
+
+    <div class="container"><!--Main Body Starts-->
+        <div class="row" style="margin-top:150px">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <input type="text" id="txtName" placeholder="Name" class="form-control" required /><br />
+                <input type="text" id="txtNumber" placeholder="Number" class="form-control" required /><br />
+                <button id="btnSubmit" class="btn btn-primary">Convert</button>
+                <br /><br />
+                <div class="card text-center">
+                    <div class="card-header">
+                        Result
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Your Name : Will be displayed here!!!</h5>
+                        <p class="card-text">Your Number in words : Will be displayed here!!!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div><!--Mai Body Ends Here-->
+
+    <!--Footer Section-->
+    <div class="panel panel-default" style="margin-top:160px">
+        <div class="panel-body panel-success">
+            Submitted By : Satyarth Rao
+        </div>
+    </div><!--Footer Ends-->
+</body>
+</html>

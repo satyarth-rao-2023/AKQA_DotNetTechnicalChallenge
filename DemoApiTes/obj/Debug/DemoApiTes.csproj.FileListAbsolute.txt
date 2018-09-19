@@ -1,0 +1,2 @@
+C:\Users\SarojSatyarth\source\repos\WebApiDemo\DemoApiTes\obj\Debug\DemoApiTes.csprojAssemblyReference.cache
+C:\Users\SarojSatyarth\source\repos\WebApiDemo\DemoApiTes\obj\Debug\DemoApiTes.csproj.CoreCompileInputs.cache
